@@ -75,3 +75,5 @@ Now I simulated this with 10,000, and the resulting data is in `logs/10000runs.t
 ![scatter-plot](./assets/2D/10000runs.png)
 
 ![hist-plot](./assets/2D/10000runshist.png)
+
+(scatter plot is `xs` and `ys` while hist plot is of distace)
