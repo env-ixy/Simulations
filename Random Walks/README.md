@@ -12,6 +12,7 @@ Random walk-adjacent patterns are seen in:
 - stock prices
 
 For a simple 1D walk, i can do:
+
 $$
 x = 
 \begin{cases}
