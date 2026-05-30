@@ -5,24 +5,40 @@ x = 0 # initial position
 ys = [] # positions
 xs = [] # time
 
-def move():
-    a = round(np.random.rand()) 
-    global x
-    if a == 0:
-        x -= 1 # move left
-    else:
-        x += 1 # move right
-    return x
-    
-for i in range(100):
-    ys.append(move())
-    xs.append(i) # time
-    
-plt.plot(xs, ys)
-plt.show()
 
-with open("logs.txt", "a") as f:
-    f.write(f"| {max(ys)} | ") # record highest position
-    f.write(f"| {ys[-1]} | ") # record final position
-    f.write(f"| {np.mean(ys)} | ") # record mean position
-    f.write("\n")
+def walk(n_steps=1000):
+    x = 0
+    positions = []
+
+    for _ in range(n_steps):
+        step = np.random.choice([-1, 1])
+        x += step
+        positions.append(x)
+
+    return {
+        "min": min(positions),
+        "final": positions[-1],
+        "max": max(positions),
+        "max_abs": np.max(np.abs(positions)),
+    }
+
+
+with open("logs.txt", "w") as f:
+    f.write("| min | final | max | max abs |\n")
+
+    for sim in range(4000):
+
+        result = walk(4000)
+        ys.append(result['final'])
+        xs.append(sim)
+        f.write(
+            f"| {result['min']} | "
+            f"{result['final']} | "
+            f"{result['max']} | "
+            f"{result['max_abs']} |\n"
+        )
+
+plt.hist(ys)
+plt.show()
+print(np.mean(ys))
+print(np.std(ys))
